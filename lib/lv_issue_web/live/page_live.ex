@@ -24,10 +24,13 @@ defmodule LvIssueWeb.PageLive do
     """
   end
 
-  def mount(_params, _session, socket), do: {:ok, assign(socket, items: [])}
+  @impl true
+  def mount(_params, _session, socket) do
+    {:ok, assign(socket, items: ["one", "two", "three"])}
+  end
 
-  def handle_info("clear-list", socket), do: {:noreply, assign(socket, items: [])}
-
-  def handle_info("set-list", socket),
-    do: {:noreply, assign(socket, items: ["test-one", "test-two", "test-three"])}
+  @impl true
+  def handle_info("clear-list", socket) do
+    {:noreply, assign(socket, items: [])}
+  end
 end

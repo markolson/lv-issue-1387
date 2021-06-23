@@ -6,15 +6,10 @@ defmodule LvIssueWeb.PageLiveTest do
   test "it has a diffing error", %{conn: conn} do
     {:ok, view, _disconnected_html} = live(conn, "/")
 
-    assert view |> render() =~ "Above"
-
-    send(view.pid, "set-list")
-
-    assert view |> render() =~ "test-three"
+    assert view |> render() =~ "three"
 
     send(view.pid, "clear-list")
 
-    # This is never reached.
-    refute view |> render() =~ "test-three"
+    assert view |> render() =~ "Above"
   end
 end
